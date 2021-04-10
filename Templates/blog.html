@@ -1,0 +1,174 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+
+      <!-- revolution slider -->
+      
+<div class="Blog-bg">
+   <div class="container">
+      <div class="row">
+         <div class="col-md-12">
+            <div class="Blogheading">
+               <h3>{{blog.Name}} </h3>
+            </div>
+         </div>
+         </div>
+         {% if user.is_authenticated %}
+      <a href="{% url 'Blogs:EditBlog' blog.slug %}">
+      <div class="row bg-primary d-flex justify-content-center">
+         <div class="col-md-12 d-flex justify-content-center">
+            <h3 class="text-light">Edit Blog</h3>
+         </div>
+      </div>
+         </a>
+      {% endif %}
+
+   </div>
+</div>
+
+
+
+      <!-- section --> 
+      <div class="section layout_padding ">
+         <div class="container" style="background-image:url({{blog.Background_Image.url}})">
+            
+            <div class="row">
+               <div class="col-md-8 offset-md-2">
+                  <div class="full">
+                     <div class="big_blog">
+                        <img class="img-responsive" src="{{blog.Image1.url}}" alt="#" height="300" width="100%"/>
+                     </div>
+                     <div class="blog_cont_2">
+                        <h3>{{blog.Subheading1}}</h3>
+                        <p class="sublittle">{{blog.Date}}</p>
+                        <p>{{blog.Paragraph1}}</p>
+                     </div>
+                  </div>
+               </div>
+            </div>
+
+                 <!-- section -->
+
+            <div class="row pt-3">
+               <div class="col-md-8 offset-md-2">
+                  <div class="full">
+                     <div class="big_blog">
+                        <img class="img-responsive" src="{{blog.Image2.url}}" alt="#"  height="300" width="100%"/>
+                     </div>
+                     <div class="blog_cont_2">
+                        <h3>{{blog.Subheading2}}</h3>
+                        <p>{{blog.Paragraph2}}</p>
+                     </div>
+                  </div>
+               </div>
+            </div>
+
+      <!-- section -->
+
+
+            <div class="row pt-3">
+               <div class="col-md-8 offset-md-2">
+                  <div class="full">
+                     <div class="big_blog">
+                        <img class="img-responsive" src="{{blog.Image3.url}}" alt="#"  height="300" width="100%"/>
+                     </div>
+                     <div class="blog_cont_2">
+                        <h3>{{blog.Subheading3}}</h3>
+                        <p>{{blog.Paragraph3}}</p>
+                     </div>
+                  </div>
+               </div>
+            </div>
+
+            <div class="row pt-3">
+               <div class="col-md-8 offset-md-2">
+                  <div class="full">
+                     <div class="big_blog">
+                        <iframe class="img-responsive" src="{{blog.Video.url}}" height="300" width="100%" allowfullscreen></iframe>
+                     </div>
+                  </div>
+               </div>
+
+            </div>
+      <!-- end section -->
+
+
+         </div>
+      </div>
+      <!-- end section -->
+
+
+
+<!-- section -->
+      <section class="layout_padding">
+         <div class="container">
+            <div class="row">
+               <div class="col-md-12">
+                  <div class="heading" style="padding-left: 15px;padding-right: 15px;">
+                     <h4 style="border-bottom: solid #333 1px;">Comments / {{blog.coments.count}}</h4>
+                  </div>
+               </div>
+            </div>
+            <div class="row">
+               <div class="col-md-12">
+                  {% for coms in blog.coments.all %}
+                  <div class="full comment_blog_line">
+                     <div class="row">
+                        <div class="col-md-1">
+                           <img src="{% static 'images/c_1.png' %}" alt="#" />
+                        </div>
+                        <div class="col-md-9">
+                           <div class="full contact_text">
+                              <h3>{{coms.Name}}</h3>
+                              <h4>Posted on {{coms.Date}}</h4>
+                              <p>{{coms.Comment}}
+                              </p>
+                           </div>
+                        </div>
+                        <div class="col-md-2">
+                           <a class="reply_bt" href="#">Reply</a>
+                        </div>
+                     </div>
+                  </div>
+                  {% endfor %}
+               </div>
+            </div>
+            <div class="row margin_top_30">
+               <div class="col-md-12 margin_top_30">
+                  <div class="heading" style="padding-left: 15px;padding-right: 15px;">
+                     <h4>Post : Your Comment</h4>
+                  </div>
+               </div>
+            </div>
+            <div class="row">
+               <div class="col-md-12">
+                  <div class="full comment_form">
+                     <form method="post">
+                        {% csrf_token %}
+                        <fieldset>
+                           <div class="col-md-12">
+                              <div class="row">
+                                 <div class="col-md-6">
+                                    <input type="text" name="name" placeholder="Name" required="#" />
+                                 </div>
+                                 <div class="col-md-6">
+                                    <input type="text" name="comment" placeholder="Comment">
+                                 </div>
+                              </div>
+                              <div class="row margin_top_30">
+                                 <div class="col-md-12">
+                                    <div class="center">
+                                       <button>Send</button>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </fieldset>
+                     </form>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
+      <!-- end section -->
+{% endblock %}

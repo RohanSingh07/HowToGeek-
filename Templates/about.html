@@ -1,0 +1,66 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+
+      <!-- section --> 
+<div class="About-bg">
+   <div class="container">
+      <div class="row">
+         <div class="col-md-12">
+            <div class="aboutheading">
+               <h3>All <span class="orange_color">Blogs</span></h3>
+            </div>
+         </div>
+      </div>
+      {% if user.is_authenticated %}
+      <a href="{% url 'Blogs:AddBlog' %}">
+      <div class="row bg-primary d-flex justify-content-center">
+         <div class="col-md-12 d-flex justify-content-center">
+            <h3 class="text-light">Add Blog</h3>
+         </div>
+      </div>
+         </a>
+      {% endif %}
+   </div>
+</div>
+
+
+
+      <div class="section layout_padding">
+         <div class="container">
+            {% for blg in blogs %}
+            <a href="{{blg.get_abs_url}}">
+            <div class="row margin_top_30">
+               <div class="col-md-6">
+                  <img src="{{blg.Image1.url}}" alt="#" height="300" width="100%"/>
+               </div>
+               <div class="col-md-6">
+                  <div class="full blog_cont">
+                     <h4>{{blg.Name}}</h4>
+                     <h5>{{blg.Date}}</h5>
+                     <p>{{blg.Paragraph1}}</p>
+                  </div>
+               </div>
+            </div>
+               </a>
+            {% endfor %}
+
+
+
+
+
+
+
+
+            <div class="row margin_top_30">
+               <div class="col-md-12">
+                  <div class="button_section full center margin_top_30">
+                     <a style="margin:0;" href="about.html">Read More</a>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- end section -->
+     
+{% endblock %}
